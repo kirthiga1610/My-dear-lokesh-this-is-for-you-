@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I Choose You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #fbc2eb);
+  font-family: 'Georgia', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  width: 90%;
+  max-width: 520px;
+}
+
+h1 {
+  color: #b30047;
+}
+
+.roses {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.rose {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #ff4d6d, #b30047);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  animation: glow 2s infinite;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.rose.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rose::after {
+  content: "🌹";
+  font-size: 42px;
+  position: absolute;
+  top: 22px;
+  left: 25px;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #ff99aa; }
+  50% { box-shadow: 0 0 25px #ff4d6d; }
+  100% { box-shadow: 0 0 10px #ff99aa; }
+}
+
+.letter {
+  display: none;
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-top: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  color: #ff3366;
+  font-size: 18px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { bottom: -10%; opacity: 1; }
+  to { bottom: 110%; opacity: 0; }
+}
+
+button {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #b30047;
+  color: white;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Background Music (Tamil Romantic Instrumental – soft) -->
+<audio id="music" autoplay loop>
+  <source src="tamil-romantic-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <h1>For You, Lokesh 🌹</h1>
+  <p>Open each rose… one step closer to my heart</p>
+
+  <div class="roses">
+    <div class="rose active" onclick="openRose(1)"></div>
+    <div class="rose" onclick="openRose(2)"></div>
+    <div class="rose" onclick="openRose(3)"></div>
+  </div>
+
+  <div id="letter" class="letter"></div>
+</div>
+
+<script>
+let opened = 0;
+
+function openRose(num) {
+  if (num !== opened + 1) return;
+
+  const letter = document.getElementById("letter");
+
+  if (num === 1) {
+    letter.innerHTML = `
+      <h3>Dear Lokesh,</h3>
+      <p>
+      Ne en vaazhkkai-ku<br>
+      siridhu amaithiyaaga vandhaalum,<br>
+      romba aazhamaaga irundhaai.<br><br>
+      Un kural enakku dhairiyam,<br>
+      un iruppu enakku amaithi,<br>
+      un anbhu enakku veedu.
+      </p>
+      <p>— Kirthiga ❤️</p>`;
+  }
+
+  if (num === 2) {
+    letter.innerHTML = `
+      <h3>My Love,</h3>
+      <p>
+      Idhu oru sudden feeling illa.<br>
+      Idhu purindha kadhal.<br><br>
+      Sandhosathilum,<br>
+      kashtathilum,<br>
+      naan un pakkathil irukka vendum.<br><br>
+      Un kooda irukkum bodhu,<br>
+      kadhal romba safe-aa irukku.
+      </p>
+      <p>— Yours, Kirthiga 🌹</p>`;
+  }
+
+  if (num === 3) {
+    letter.innerHTML = `
+      <h3>Lokesh,</h3>
+      <p>
+      Idhu oru nodi-yin mudivu illa.<br><br>
+      Idhu naan unnai<br>
+      indru mattum illa,<br>
+      naalaiyum,<br>
+      ellaa naalum theermaanikkira tharunam.<br><br>
+      En kai un kai-la,<br>
+      en manasu un veetula irukka naan aasai padren.
+      </p>
+      <button onclick="finalReveal()">Final Message</button>
+    `;
+  }
+
+  letter.style.display = "block";
+  opened++;
+  unlockNext();
+}
+
+function unlockNext() {
+  const roses = document.querySelectorAll(".rose");
+  if (opened < roses.length) {
+    roses[opened].classList.add("active");
+  }
+}
+
+/* 🎶 MUSIC CHANGES HERE */
+function finalReveal() {
+  const music = document.getElementById("music");
+  music.src = "tamil-romantic-2.mp3";
+  music.play();
+
+  const letter = document.getElementById("letter");
+  letter.innerHTML = `
+    <h2>Lokesh ❤️</h2>
+    <p>
+    Indha ulagathula<br>
+    romba choices irundhaalum,<br>
+    naan unnai dhaan theermaanichirukken.<br><br>
+    Easy-aa irundhadhunaala illa…<br>
+    unmai-aa irundhadhunaala.<br><br>
+    En kadhal oru payanam na,<br>
+    adhu ellaa steps-um unnoda dhaan.
+    </p>
+    <h3>I choose you.<br>— Kirthiga 🌹</h3>
+  `;
+}
+
+/* Floating hearts continuously */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (16 + Math.random() * 22) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 350);
+</script>
+
+</body>
+</html>
